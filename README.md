@@ -22,7 +22,7 @@ This is a helper module which brings react native as an engine to drive share ex
 Installation should be very easy by just installing it from npm.
 
 ```js
-npm install react-native-share-extension --save
+npm install --save @refundit/react-native-share-extension
 ```
 
 # Setup
