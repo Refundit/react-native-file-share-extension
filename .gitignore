@@ -3,7 +3,7 @@
 .tags
 .tags1
 # Xcode
-!**/*.xcodeproj
+
 !**/*.pbxproj
 !**/*.xcworkspacedata
 !**/*.xcsettings
@@ -48,8 +48,8 @@ buck-out
 .gradle
 local.properties
 *.iml
-/android/
-
+.project
+.settings
 # Node
 node_modules
 *.log
