@@ -1,6 +1,6 @@
 {
   "name": "@refundit/react-native-share-extension",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "share extension using react-native for both ios and android",
   "main": "lib/index.js",
   "scripts": {
