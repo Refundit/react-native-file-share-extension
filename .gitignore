@@ -56,7 +56,10 @@ node_modules
 .nvm
 /bots/node_modules/
 package-lock.json
-
+android/build
+android/.gradle
+android/.idea
+android/.project
 # OS X
 .DS_Store
 
