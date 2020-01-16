@@ -10,6 +10,10 @@ This Module was originally forked from https://github.com/alinz/react-native-sha
 | New Example app  | :heavy_multiplication_x:  |
 | Support another doc types  | :heavy_multiplication_x: |
 
+SUPPORT for RN 0.61+
+
+https://github.com/alinz/react-native-share-extension/issues/182#issuecomment-534993812
+
 This is a helper module which brings react native as an engine to drive share extension for your app.
 
 <p align="center">
