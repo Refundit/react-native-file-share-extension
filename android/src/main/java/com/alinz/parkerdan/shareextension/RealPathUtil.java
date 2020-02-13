@@ -149,19 +149,26 @@ public class RealPathUtil {
             }
         }
 
-        String dataFromUri = getDataColumn(context, uri, null, null);
 
-        if (dataFromUri == null) {
+        if (fileExtension.equals("application/vnd.apple.pkpass")) {
             return copyFile(context, uri, fileExtension);
+        } else {
+
+            String dataFromUri = getDataColumn(context, uri, null, null);
+
+            if (dataFromUri == null) {
+                return copyFile(context, uri, fileExtension);
+            }
+
+            String[] arrOfStrings = dataFromUri.split("content://");
+
+            if (arrOfStrings.length > 1) {
+                return copyFile(context, uri, fileExtension);
+            }
+
+            return dataFromUri;
         }
 
-        String[] arrOfStrings = dataFromUri.split("content://");
-
-        if (arrOfStrings.length > 1) {
-            return copyFile(context, uri, fileExtension);
-        }
-
-        return dataFromUri;
     }
 
     /**
@@ -193,6 +200,9 @@ public class RealPathUtil {
                 break;
             case "application/pdf":
                 extension = ".pdf";
+                break;
+            case "application/vnd.apple.pkpass":
+                extension = ".zip";
                 break;
             default:
                 extension = ".jpg";
