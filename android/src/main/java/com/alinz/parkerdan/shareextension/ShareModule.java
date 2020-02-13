@@ -65,6 +65,10 @@ public class ShareModule extends ReactContextBaseJavaModule {
                 Uri uri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
                 value = "file://" + RealPathUtil.getRealPathFromURI(currentActivity, uri, type);
                 intent.setType("clear");
+            } else if (Intent.ACTION_SEND.equals(action) && ("application/vnd.apple.pkpass".equals(type))) {
+                Uri uri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
+                value = "file://" + RealPathUtil.getRealPathFromURI(currentActivity, uri, type);
+                intent.setType("clear");
             } else if ("clear".equals(type)) {
                 value = "";
                 type = "";
