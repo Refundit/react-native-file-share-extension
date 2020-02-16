@@ -1,11 +1,13 @@
 #import "ReactNativeShareExtension.h"
 #import "React/RCTRootView.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import <PassKit/PassKit.h>
 
 #define URL_IDENTIFIER @"public.url"
 #define IMAGE_IDENTIFIER @"public.image"
 #define TEXT_IDENTIFIER (NSString *)kUTTypePlainText
 #define PDF_IDENTIFIER (NSString *)kUTTypePDF
+#define PASS_IDENTIFIER @"com.apple.pkpass"
 
 NSExtensionContext* extensionContext;
 
@@ -79,6 +81,7 @@ NSExtensionContext* extensionContext;
         __block NSItemProvider *imageProvider = nil;
         __block NSItemProvider *textProvider = nil;
         __block NSItemProvider *docProvider = nil;
+        __block NSItemProvider *passProvider = nil;
         
         [attachments enumerateObjectsUsingBlock:^(NSItemProvider *provider, NSUInteger idx, BOOL *stop) {
             if([provider hasItemConformingToTypeIdentifier:URL_IDENTIFIER]) {
@@ -94,12 +97,17 @@ NSExtensionContext* extensionContext;
                 docProvider = provider;
                 *stop = YES;
             }
+            else if ([provider hasItemConformingToTypeIdentifier:PASS_IDENTIFIER]){
+                passProvider = provider;
+                *stop = YES;
+            }
         }];
         
         if(urlProvider) {
             [urlProvider loadItemForTypeIdentifier:URL_IDENTIFIER options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error) {
                 NSURL *url = (NSURL *)item;
-                
+                NSLog(@"Fired url provider");
+                NSLog(@"%@", url);
                 if(callback) {
                     callback([url absoluteString], @"text/plain", nil);
                 }
@@ -107,7 +115,7 @@ NSExtensionContext* extensionContext;
         } else if (imageProvider) {
             [imageProvider loadItemForTypeIdentifier:IMAGE_IDENTIFIER options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error) {
                 NSURL *url = (NSURL *)item;
-                
+                NSLog(@"%@", url);
                 if(callback) {
                     callback([url absoluteString], [[[url absoluteString] pathExtension] lowercaseString], nil);
                 }
@@ -126,6 +134,12 @@ NSExtensionContext* extensionContext;
                 
                 if(callback) {
                     callback([url absoluteString], [[[url absoluteString] pathExtension] lowercaseString], nil);
+                }
+            }];
+        } else if (passProvider) {
+            [passProvider loadItemForTypeIdentifier:PASS_IDENTIFIER options:nil completionHandler:^(id<NSSecureCoding> item, NSError *error) {
+                if(callback) {
+                     callback(item, @"application/vnd.apple.pkpass", nil);
                 }
             }];
         } else {
