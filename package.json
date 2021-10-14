@@ -1,6 +1,6 @@
 {
-  "name": "@refundit/react-native-share-extension",
-  "version": "2.1.6",
+  "name": "@refundit/react-native-share-extension-all",
+  "version": "2.1.7",
   "description": "share extension using react-native for both ios and android",
   "main": "lib/index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:Refundit/react-native-file-share-extension.git"
+    "url": "git@github.com:Refundit/react-native-share-extension-all.git"
   },
   "keywords": ["react-component", "react-native", "share-extension"],
   "author": {
@@ -20,5 +20,5 @@
   "bugs": {
     "url": "https://github.com/alinz/react-native-share-extension"
   },
-  "homepage": "https://github.com/Refundit/react-native-file-share-extension"
+  "homepage": "https://github.com/Refundit/react-native-share-extension-all"
 }
